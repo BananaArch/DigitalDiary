@@ -1,0 +1,99 @@
+CREATE TABLE IF NOT EXISTS noteEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    colorHex INTEGER NOT NULL,
+    created INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS reminderEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    start INTEGER NOT NULL,
+    end INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS contactEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT NOT NULL,
+    colorHex INTEGER NOT NULL
+);
+
+getAllNotes:
+SELECT *
+FROM noteEntity;
+
+getAllContacts:
+SELECT *
+FROM contactEntity;
+
+getAllReminders:
+SELECT *
+FROM reminderEntity;
+
+
+
+getNoteById:
+SELECT *
+FROM noteEntity
+WHERE id = ?;
+
+getReminderById:
+SELECT *
+FROM reminderEntity
+WHERE id = ?;
+
+getContactById:
+SELECT *
+FROM contactEntity
+WHERE id = ?;
+
+
+
+insertNote:
+INSERT OR REPLACE
+INTO noteEntity(
+    id,
+    title,
+    content,
+    colorHex,
+    created
+) VALUES(?, ?, ?, ?, ?);
+
+insertReminder:
+INSERT OR REPLACE
+INTO reminderEntity(
+    id,
+    title,
+    start,
+    end
+) VALUES(?, ?, ?, ?);
+
+insertContact:
+INSERT OR REPLACE
+INTO contactEntity(
+    id,
+    name,
+    phone,
+    email,
+    colorHex
+) VALUES(?, ?, ?, ?, ?);
+
+
+
+deleteNoteById:
+DELETE FROM noteEntity
+WHERE id = ?;
+
+deleteReminderById:
+DELETE FROM reminderEntity
+WHERE id = ?;
+
+deleteContactById:
+DELETE FROM contactEntity
+WHERE id = ?;
+
+
+
+getLastReminderId:
+SELECT LAST_INSERT_ROWID();
